@@ -1,7 +1,7 @@
 import numpy as np
-#from torchvision import transforms as tf
+from torchvision import transforms as tf
 import random
-
+import torch
 """This script implements the functions for data augmentation
 and preprocessing.
 """
@@ -38,6 +38,8 @@ def parse_record(record, training):
         ])
     else:
         transform = tf.Normalize((0.4914, 0.4822, 0.4465), (0.247, 0.243, 0.261))
+    
+    record = torch.tensor(record.reshape( 3, 32, 32), dtype = torch.float32)
 
     image = transform(record)
 

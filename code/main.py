@@ -59,7 +59,7 @@ def configure():
     parser.add_argument("--first_num_filters", type=int, default=16, help='number of classes')
     parser.add_argument("--weight_decay", type=float, default=2e-4, help='weight decay rate')
     parser.add_argument("--modeldir", type=str, default='model_v2', help='model directory')
-    parser.add_argument("--modelname", type=str, default='densenet_withpreimg_v1', help='model name')
+    parser.add_argument("--modelname", type=str, default='densenet_withpreimg_v2', help='model name')
 
     parser.add_argument("--lr", type=float, default=0.001, help='Learning Rate')
     ### YOUR CODE HERE

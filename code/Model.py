@@ -148,17 +148,21 @@ class Cifar(nn.Module):
                 # Don't forget L2 weight decay
                 starting_index = i * self.batch_size
                 ending_index = min(curr_x_train.shape[0], i * self.batch_size + self.batch_size)
+                size_tmp = ending_index - starting_index
+                curr_x_train_batch = [parse_record(curr_x_train[j], True).numpy() for j in range(starting_index, ending_index)]
+
                 #curr_x_train_batch = [parse_record(curr_x_train[j], True) for j in range(starting_index, ending_index)]
                 #curr_x_train_batch = [curr_x_train[j] for j in range(starting_index, ending_index)]
-                curr_x_train_batch = curr_x_train[starting_index:ending_index]
+                #curr_x_train_batch = curr_x_train[starting_index:ending_index]
                 curr_y_train_batch = curr_y_train[starting_index: ending_index]
-
+                curr_x_train_batch = np.asarray(curr_x_train_batch).reshape(size_tmp,3,32,32)
                 #if torch.cuda.is_available():
                 #tensor_cur_x_batch = torch.from_numpy(np.array(curr_x_train_batch)).float().cuda()
                 #tensor_cur_y_batch = torch.from_numpy(np.array(curr_y_train_batch)).long().cuda()
-                tensor_cur_x_batch = torch.tensor(curr_x_train_batch.reshape(curr_x_train_batch.shape[0],3,32,32), dtype=torch.float32).cuda()
+                #tensor_cur_x_batch = torch.tensor(curr_x_train_batch.reshape(curr_x_train_batch.shape[0],3,32,32), dtype=torch.float32).cuda()
+                #tensor_cur_y_batch = torch.tensor(curr_y_train_batch.reshape(curr_y_train_batch.shape[0]), dtype=torch.long).cuda()
+                tensor_cur_x_batch = torch.tensor(curr_x_train_batch, dtype=torch.float32).cuda()
                 tensor_cur_y_batch = torch.tensor(curr_y_train_batch.reshape(curr_y_train_batch.shape[0]), dtype=torch.long).cuda()
-
 
 
                 #else:
